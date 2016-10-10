@@ -4,6 +4,7 @@ MAINTAINER Michal Hlavac <miso@hlavki.eu>
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV KARAF_VERSION 4.0.7
 ENV JAVA_MAX_MEM 256m
+ENV KARAF_EXEC exec
 
 RUN wget http://www-eu.apache.org/dist/karaf/${KARAF_VERSION}/apache-karaf-${KARAF_VERSION}.tar.gz; \
     mkdir -p /opt/karaf; \
@@ -13,4 +14,4 @@ RUN wget http://www-eu.apache.org/dist/karaf/${KARAF_VERSION}/apache-karaf-${KAR
 
 VOLUME ["/opt/data"]
 EXPOSE 1099 8101 44444
-ENTRYPOINT ["/opt/karaf/bin/karaf"]
+CMD ["/opt/karaf/bin/karaf"]
