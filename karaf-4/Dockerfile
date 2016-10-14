@@ -10,8 +10,10 @@ RUN wget http://www-eu.apache.org/dist/karaf/${KARAF_VERSION}/apache-karaf-${KAR
     mkdir -p /opt/karaf; \
     tar --strip-components=1 -C /opt/karaf -xzf apache-karaf-${KARAF_VERSION}.tar.gz; \
     rm apache-karaf-${KARAF_VERSION}.tar.gz; \
-    mkdir /opt/data
+    mkdir -p /opt/maven/repository;
 
-VOLUME ["/opt/data"]
+RUN sed -i '/org.ops4j.pax.url.mvn.repositories/a \ \ \ \ file:///opt/maven/repository@id=local.app,\ \\' /opt/karaf/etc/org.ops4j.pax.url.mvn.cfg
+
+VOLUME ["/opt/maven/repository"]
 EXPOSE 1099 8101 44444
 CMD ["/opt/karaf/bin/karaf"]
